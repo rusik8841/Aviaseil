@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AirlinesApp.Views.FlightsPage"
+             Title="Рейсы">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Button Text="Обновить" Clicked="OnLoadClicked" />
+
+            <CollectionView x:Name="ItemsList" SelectionMode="Single"
+                            SelectionChanged="OnSelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5" Margin="0,2" Stroke="Gray">
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding flight_number, StringFormat='Рейс {0}'}" FontAttributes="Bold" />
+                                <Label Text="{Binding departure_datetime, StringFormat='{0:dd.MM.yyyy HH:mm}'}" />
+                                <Label Text="{Binding is_cancelled, StringFormat='Отменён: {0}'}" TextColor="Red" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <BoxView HeightRequest="2" Color="Gray" />
+            <Label Text="Добавить / Редактировать:" FontAttributes="Bold" />
+
+            <Entry x:Name="EntNum" Placeholder="Номер рейса" Keyboard="Numeric" />
+            <Label Text="Дата вылета:" />
+            <DatePicker x:Name="EntDate" />
+            <Label Text="Время вылета:" />
+            <TimePicker x:Name="EntTime" />
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Отменён:" VerticalOptions="Center" />
+                <Switch x:Name="SwCancelled" />
+            </HorizontalStackLayout>
+            <Entry x:Name="EntRouteId" Placeholder="ID маршрута" Keyboard="Numeric" />
+            <Entry x:Name="EntAircraftId" Placeholder="ID самолёта" Keyboard="Numeric" />
+            <Entry x:Name="EntPassId" Placeholder="ID пассажира" Keyboard="Numeric" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Сохранить" Clicked="OnSaveClicked" BackgroundColor="Green" TextColor="White" />
+                <Button Text="Удалить" Clicked="OnDeleteClicked" BackgroundColor="Red" TextColor="White" />
+                <Button Text="Очистить" Clicked="OnClearClicked" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
